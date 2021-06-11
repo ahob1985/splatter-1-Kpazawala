@@ -1,22 +1,41 @@
 // Author:
 
 // Global UI Variables
-//let canvasDiv;
+let canvasDiv;
+let canvas;
+let buttonDiv;
+let clearButton;
+let sliderDiv;
+let slider;
+let minSpan;
+let maxSpan;
 
 function setup() {
-  // create canvas UI
+  canvas = createCanvas(640, 480);
+  background(65, 60, 88);
+
+  sliderDiv = createDiv();
+  minSpan = createSpan("Min");minSpan.parent(sliderDiv);
+
+  slider = createSlider(0, 100, 50, 1);
+  slider.parent(sliderDiv);
+
+  maxSpan = createSpan("Max");maxSpan.parent(sliderDiv);
+
+  canvas.mousePressed(drawSplatter);
+  canvas.parent(canvasDiv);
 
   // create slider UI
 
   // create button UI
+  buttonDiv = createDiv();
+  clearButton = createButton("Clear Canvas");
 
-}
+  clearButton.mousePressed(function() {
+    background(65, 60, 88);
+  });
 
-function draw() {
-
-}
-
-function drawEllipse() {
+  clearButton.parent(buttonDiv);
 
 }
 
@@ -38,5 +57,23 @@ function drawEllipse() {
 *******************************************************************************/
 
 function drawSplatter(){
+  let ellipses = random(10, 15);
+  let spread = slider.value();
+
+  fill(random(100, 256), random(100, 256), random(100, 256));
+  noStroke();
+
+  for(let i = 0; i < ellipses; i++) {
+
+  let randomSize = random(5, 15);
+
+  let randomX = random(mouseX - spread, mouseX + spread + 1);
+
+  let randomY = random(mouseY - spread, mouseY + spread + 1);
+
+  ellipse(randomX, randomY, randomSize);
+  
+  }
+  
 
 }
